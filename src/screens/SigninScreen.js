@@ -1,34 +1,36 @@
-import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
+import React, { useContext } from "react";
 import { NavigationEvents } from "react-navigation";
-import { Context as AuthCtx } from "../context/AuthContext";
 import AuthFrom from "../components/AuthFrom";
 import NavLink from "../components/NavLink";
-const SignupScreen = ({ navigation }) => {
-  const { state, signup, clearErrMsg } = useContext(AuthCtx);
+import { Context } from "../context/AuthContext";
 
+const SigninScreen = () => {
+  const { state, signin, clearErrMsg } = useContext(Context);
   return (
     <View style={styles.container}>
       <NavigationEvents onWillFocus={clearErrMsg} />
       <AuthFrom
-        headerText="Sign Up for Tracker"
+        headerText="Sign In to Your Account"
         errorMsg={state.errorMessage}
-        onSubmit={signup}
-        subBtnTxt="Sign Up"
+        onSubmit={signin}
+        subBtnTxt="Sign In"
       />
       <NavLink
-        routeName="Signin"
-        text=" Already have an Account? Sign in instead"
+        text="'Dont't have an account? Sign up instead"
+        routeName="Signup"
       />
     </View>
   );
 };
 
-SignupScreen.navigationOptions = () => {
+SigninScreen.navigationOptions = () => {
   return {
     headerShown: false,
   };
 };
+
+export default SigninScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -37,5 +39,3 @@ const styles = StyleSheet.create({
     marginBottom: 250,
   },
 });
-
-export default SignupScreen;
